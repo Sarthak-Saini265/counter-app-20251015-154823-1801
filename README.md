@@ -2,18 +2,21 @@
 
 ## Summary
 
-Create a simple counter app with Bootstrap 5. It should have a display showing the count (starting at 0) with id='counter-display', an increment button with id='btn-increment', and a decrement button with id='btn-decrement'. Make it look clean and modern.
+[Updated] Update the counter app: Add a RESET button with id='btn-reset' that sets the counter back to 0. Also add a DOUBLE button with id='btn-double' that doubles the current count. Change the background to a beautiful gradient (light blue to light purple). Add a heading 'Counter App' and make the counter display larger and more prominent with a colored border.
 
 ## Features
 
 This application was automatically generated to meet the following requirements:
 
-- Page uses Bootstrap 5
-- Has counter display with id='counter-display'
-- Has increment button with id='btn-increment'
-- Has decrement button with id='btn-decrement'
-- Counter increases when increment is clicked
-- Counter decreases when decrement is clicked
+- Page still uses Bootstrap 5
+- Has all previous buttons (increment, decrement)
+- Has NEW reset button with id='btn-reset'
+- Has NEW double button with id='btn-double'
+- Reset button sets counter to 0
+- Double button multiplies counter by 2
+- Background has gradient styling
+- Has heading text
+- Counter display is styled with border
 
 ## Setup
 
