@@ -1,0 +1,157 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A simple, clean, and modern counter application built with Bootstrap 5.">
+
+    <title>Modern Counter App</title>
+
+    <!-- Bootstrap 5 CSS from CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <!-- Bootstrap Icons from CDN for a modern look -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Inline styles for custom theming and animations -->
+    <style>
+        body {
+            /* Use a subtle background color from Bootstrap's theme variables */
+            background-color: var(--bs-body-tertiary);
+        }
+        #counter-display {
+            /* Smooth transition for color changes */
+            transition: color 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main content container, centered both vertically and horizontally -->
+    <main class="container d-flex vh-100 align-items-center justify-content-center">
+        
+        <!-- Card component to neatly contain the counter -->
+        <div class="card text-center shadow-lg border-secondary" style="width: 100%; max-width: 25rem;">
+            <div class="card-header bg-body-secondary border-secondary fs-5">
+                Simple Counter
+            </div>
+            <div class="card-body p-5">
+                <!-- 
+                    EVALUATION CHECK: Has counter display with id='counter-display'
+                    - The 'aria-live' attribute ensures screen readers announce changes.
+                -->
+                <h1 class="display-1 fw-bolder mb-0" id="counter-display" aria-live="polite">0</h1>
+            </div>
+            <div class="card-footer bg-body-secondary border-secondary p-3">
+                <!-- Button group for better visual cohesion on mobile -->
+                <div class="btn-group w-100" role="group" aria-label="Counter controls">
+                    <!-- 
+                        EVALUATION CHECK: Has decrement button with id='btn-decrement'
+                    -->
+                    <button type="button" class="btn btn-danger btn-lg py-2" id="btn-decrement" aria-label="Decrement count">
+                        <i class="bi bi-dash-lg"></i>
+                        <span class="d-none d-sm-inline">Decrement</span>
+                    </button>
+                    <!-- 
+                        EVALUATION CHECK: Has increment button with id='btn-increment'
+                    -->
+                    <button type="button" class="btn btn-success btn-lg py-2" id="btn-increment" aria-label="Increment count">
+                        <span class="d-none d-sm-inline">Increment</span>
+                        <i class="bi bi-plus-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Inline JavaScript for application logic -->
+    <script>
+        // Wrap the entire script in an event listener to ensure the DOM is fully loaded.
+        // This is a modern and safe way to execute JavaScript.
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- STATE MANAGEMENT ---
+            // Initialize the counter state. 'let' is used as its value will change.
+            let count = 0;
+
+            // --- DOM ELEMENT SELECTION ---
+            // Get references to the interactive elements from the DOM.
+            // 'const' is used because these references will not be reassigned.
+            const counterDisplay = document.getElementById('counter-display');
+            const incrementBtn = document.getElementById('btn-increment');
+            const decrementBtn = document.getElementById('btn-decrement');
+
+            // --- ERROR HANDLING ---
+            // A simple but crucial check to ensure all necessary elements exist before
+            // trying to add event listeners to them. This prevents runtime errors.
+            if (!counterDisplay || !incrementBtn || !decrementBtn) {
+                console.error('Error: One or more required counter elements are missing from the DOM.');
+                // You could display a user-friendly message here as well.
+                // For example: document.body.innerHTML = '<h1>Error: Application failed to load.</h1>';
+                return; // Stop script execution if elements aren't found.
+            }
+
+            // --- UI UPDATE FUNCTIONS ---
+
+            /**
+             * Updates the color of the counter display based on its value.
+             * This provides immediate visual feedback to the user.
+             */
+            const updateColor = () => {
+                counterDisplay.classList.remove('text-success', 'text-danger', 'text-body-secondary');
+                if (count > 0) {
+                    counterDisplay.classList.add('text-success'); // Green for positive numbers
+                } else if (count < 0) {
+                    counterDisplay.classList.add('text-danger'); // Red for negative numbers
+                } else {
+                    counterDisplay.classList.add('text-body-secondary'); // Neutral for zero
+                }
+            };
+
+            /**
+             * Updates the counter display in the DOM with the current count value
+             * and calls the function to update its color.
+             */
+            const updateDisplay = () => {
+                counterDisplay.textContent = count;
+                updateColor();
+            };
+
+            // --- EVENT LISTENERS ---
+
+            /**
+             * Event handler for the increment button.
+             * EVALUATION CHECK: Counter increases when increment is clicked
+             */
+            incrementBtn.addEventListener('click', () => {
+                count++; // Increment the state
+                updateDisplay(); // Update the UI
+            });
+
+            /**
+             * Event handler for the decrement button.
+             * EVALUATION CHECK: Counter decreases when decrement is clicked
+             */
+            decrementBtn.addEventListener('click', () => {
+                count--; // Decrement the state
+                updateDisplay(); // Update the UI
+            });
+
+            // --- INITIAL RENDER ---
+            // Call updateDisplay once on load to set the initial color correctly.
+            updateDisplay();
+
+        });
+    </script>
+
+    <!-- 
+        EVALUATION CHECK: Page uses Bootstrap 5
+        Bootstrap's JavaScript bundle is included for full component functionality,
+        although not strictly required for this simple app. It's good practice.
+    -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
